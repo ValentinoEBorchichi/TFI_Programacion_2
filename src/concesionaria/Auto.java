@@ -38,5 +38,6 @@ public class Auto extends Vehiculo {
             ", tipo='" + tipo + "'" +
             '}';
     }
+    
 
 }

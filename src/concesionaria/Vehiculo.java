@@ -47,7 +47,7 @@ abstract public class Vehiculo {
                 ", modelo='" + modelo + "'" +
                 ", anio=" + anio +
                 ", estado='" + estado + "'" +
-                ", precio=" + precio + "'" +
+                ", precio=" + precio +
                 '}';
     }
 
