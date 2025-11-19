@@ -1,4 +1,4 @@
-package src.concesionaria;
+package concesionaria;
 
 import java.util.ArrayList;
 import java.util.Scanner;

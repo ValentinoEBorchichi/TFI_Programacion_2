@@ -1,4 +1,4 @@
-package src.concesionaria;
+package concesionaria;
 
 public class Venta {
     String 

@@ -1,4 +1,4 @@
-package src.concesionaria;
+package concesionaria;
 
 public abstract class Empleado extends Persona {
 
