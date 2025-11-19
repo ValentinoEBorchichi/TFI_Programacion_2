@@ -32,14 +32,14 @@ abstract public class Vehiculo {
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
-    @Override
+  @Override
     public String toString() {
         return "Vehiculo{" +
                 "patente=" + patente +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
+                ", marca='" + marca + "'" +
+                ", modelo='" + modelo + "'" +
                 ", anio=" + anio +
-                ", estado='" + estado + '\'' +
+                ", estado='" + estado + "'" +
                 '}';
     }
 
