@@ -1,3 +1,5 @@
+package src.concesionaria;
+
 public class EmpleadoMantenimiento extends Empleado {
 
     private String especialidad; 

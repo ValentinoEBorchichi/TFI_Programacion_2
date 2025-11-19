@@ -1,3 +1,5 @@
+package src.concesionaria;
+
 public class Auto extends Vehiculo {
     private int cantidadPuertas;
     private String tipo;

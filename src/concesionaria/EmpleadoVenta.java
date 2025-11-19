@@ -1,3 +1,5 @@
+package src.concesionaria;
+
 public class EmpleadoVenta extends Empleado {
 
     private double comisionPorVenta; 

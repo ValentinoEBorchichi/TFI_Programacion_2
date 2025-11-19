@@ -1,3 +1,5 @@
+package src.concesionaria;
+
 import java.util.Objects;
 
 abstract public class Vehiculo {

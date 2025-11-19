@@ -1,3 +1,5 @@
+package src.concesionaria;
+
 public abstract class Empleado extends Persona {
 
     protected int legajo;
