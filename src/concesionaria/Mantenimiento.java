@@ -1,3 +1,5 @@
+package src.concesionaria;
+
 public class Mantenimiento {
     int idMantenimiento;
     String descripcion;
