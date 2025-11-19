@@ -1,3 +1,4 @@
+package src.concesionaria;
 
 public class Persona {
     int DNI;

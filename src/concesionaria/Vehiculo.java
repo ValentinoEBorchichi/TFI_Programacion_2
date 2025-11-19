@@ -1,3 +1,4 @@
+package src.concesionaria;
 
 abstract public class Vehiculo {
     int Patente;

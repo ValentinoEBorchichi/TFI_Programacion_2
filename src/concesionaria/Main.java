@@ -1,3 +1,4 @@
+package src.concesionaria;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,8 +10,8 @@ public class Main {
         Cliente cliente = new Cliente(12345678, "Juan", "Perez", "Calle Falsa 123", "123456789", "juan.perez@example.com");
         // menú principal con opciones para gestionar clientes por ahora
         
-        //mostrarMenuPrincipal();
-        new Main().new Menus().mostrarMenuPrincipal();
+        // pasar la instancia de cliente al Menú principal
+        new Main().new Menus(cliente).mostrarMenuPrincipal();
 
         System.out.println("Programa finalizado.");
 
@@ -18,24 +19,30 @@ public class Main {
     }
 
     class Menus {
- 
+        private final Cliente cliente;
+
+        Menus(Cliente cliente) {
+            this.cliente = cliente;
+        }
+
         public void mostrarMenuPrincipal() {
             Scanner sc = new Scanner(System.in);
-            int opcion;
+            int opcion = 0;
             
             while (opcion != 5) { // inicio del bucle while
-                //System.out.println("\n--- " + concesionaria.getNombre() + " ---");
+                System.out.println("\n--- Concesionaria El Pepe ---");
                 System.out.println("1. Opciones de cliente");
                 System.out.println("2. Opciones de autos");
                 System.out.println("3. Opciones de ventas");
                 System.out.println("4. Opciones de mantenimiento");
                 System.out.println("5. Salir");
                 System.out.print("Elija una opción: ");
+                System.out.println("\n");
 
                 opcion = Integer.parseInt(sc.nextLine().trim());
                 switch (opcion) {
                     case 1:
-                        opcionesCliente();
+                        cliente.opcionesCliente(sc);
                         break;
                     /* 
                     case 2:
