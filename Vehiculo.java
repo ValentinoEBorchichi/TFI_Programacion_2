@@ -4,7 +4,7 @@ abstract public class Vehiculo {
     private int patente;
     private String marca;
     private String modelo;
-    private int anio;   
+    private int anio;
     private String estado;
 
     // Constructor
@@ -36,10 +36,10 @@ abstract public class Vehiculo {
     public String toString() {
         return "Vehiculo{" +
                 "patente=" + patente +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
+                ", marca='" + marca + "'" +
+                ", modelo='" + modelo + "'" +
                 ", anio=" + anio +
-                ", estado='" + estado + '\'' +
+                ", estado='" + estado + "'" +
                 '}';
     }
 
@@ -54,37 +54,5 @@ abstract public class Vehiculo {
     @Override
     public int hashCode() {
         return Objects.hash(patente);
-    }
-
-    //getters y setters
-    public int getPatente() {
-        return Patente;
-    }
-    public void setPatente(int patente) {
-        Patente = patente;
-    }
-    public String getMarca() {
-        return Marca;
-    }
-    public void setMarca(String marca) {
-        Marca = marca;
-    }
-    public String getModelo() {
-        return Modelo;
-    }
-    public void setModelo(String modelo) {
-        Modelo = modelo;
-    }
-    public int getAnio() {
-        return Anio;
-    }
-    public void setAnio(int anio) {
-        Anio = anio;
-    }
-    public String getEstado() {
-        return Estado;
-    }
-    public void setEstado(String estado) {
-        Estado = estado;
     }
 }

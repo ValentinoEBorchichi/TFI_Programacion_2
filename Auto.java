@@ -8,7 +8,7 @@ public class Auto extends Vehiculo {
         this.cantidadPuertas = cantidadPuertas;
         this.tipo = tipo;
     }
-    
+
     // Getters y Setters
     public int getCantidadPuertas() {
         return cantidadPuertas;
@@ -27,12 +27,12 @@ public class Auto extends Vehiculo {
     public String toString() {
         return "Auto{" +
             "patente=" + getPatente() +
-            ", marca='" + getMarca() + '\'' +
-            ", modelo='" + getModelo() + '\'' +
+            ", marca='" + getMarca() + "'" +
+            ", modelo='" + getModelo() + "'" +
             ", anio=" + getAnio() +
-            ", estado='" + getEstado() + '\'' +
+            ", estado='" + getEstado() + "'" +
             ", cantidadPuertas=" + cantidadPuertas +
-            ", tipo='" + tipo + '\'' +
+            ", tipo='" + tipo + "'" +
             '}';
     }
 
