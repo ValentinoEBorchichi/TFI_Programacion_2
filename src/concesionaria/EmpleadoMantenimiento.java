@@ -1,22 +1,21 @@
 package concesionaria;
 
+import concesionaria.Empleados.Empleado;
+
 public class EmpleadoMantenimiento extends Empleado {
 
     private String especialidad; 
     private int trabajosRealizados;
     private double extraPorTrabajo;
 
-    public EmpleadoMantenimiento(int DNI, String nombre, String apellido,
-                                 String direccion, String telefono, String email,
-                                 int legajo, double sueldoBase,
-                                 String especialidad, double extraPorTrabajo) {
+    public EmpleadoMantenimiento(int DNI, String nombre, String apellido, String direccion, String telefono, String email, int legajo, double sueldoBase,String especialidad, double extraPorTrabajo) {
         super(DNI, nombre, apellido, direccion, telefono, email, legajo, sueldoBase);
         this.especialidad = especialidad;
         this.trabajosRealizados = 0;
         this.extraPorTrabajo = extraPorTrabajo;
     }
 
-    public void registrarMantenimiento(Mantenimiento m) {
+    public void registrarMantenimiento(Mantenimiento mantenimiento) {
         trabajosRealizados++;
     }
 

@@ -1,5 +1,7 @@
 package concesionaria;
 
+import concesionaria.Empleados.Empleado;
+
 public class EmpleadoVenta extends Empleado {
 
     private double comisionPorVenta; 
