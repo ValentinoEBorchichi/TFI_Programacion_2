@@ -3,7 +3,7 @@ package concesionaria;
 public abstract class Empleado extends Persona {
 
     private int legajo;
-    private double sueldoBase;
+    protected double sueldoBase;
 
     public Empleado(int DNI, String nombre, String apellido,
                     String direccion, String telefono, String email,

@@ -1,7 +1,5 @@
 package concesionaria;
 
-import concesionaria.Empleados.Empleado;
-
 public class EmpleadoMantenimiento extends Empleado {
 
     private String especialidad; 
