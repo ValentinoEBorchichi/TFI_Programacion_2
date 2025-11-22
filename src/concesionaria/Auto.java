@@ -1,6 +1,7 @@
 package concesionaria;
 
 public class Auto extends Vehiculo {
+
     private int cantidadPuertas;
     private String tipo;
 
@@ -33,11 +34,9 @@ public class Auto extends Vehiculo {
             ", modelo='" + getModelo() + "'" +
             ", anio=" + getAnio() +
             ", estado='" + getEstado() + "'" +
-            ", precio=" + getPrecio() + "'" +
+            ", precio=" + getPrecio() +
             ", cantidadPuertas=" + cantidadPuertas +
             ", tipo='" + tipo + "'" +
             '}';
     }
-    
-
 }
