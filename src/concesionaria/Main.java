@@ -1,5 +1,6 @@
 package concesionaria;
 
+//import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -19,10 +20,12 @@ public class Main {
 
     class Menus {
         private final Cliente cliente;
+       // private ArrayList<Mantenimiento> listaMantenimientos = new ArrayList<>();
 
         Menus(Cliente cliente) {
             this.cliente = cliente;
         }
+
 
         public void mostrarMenuPrincipal() {
             Scanner sc = new Scanner(System.in);
@@ -39,7 +42,7 @@ public class Main {
                 System.out.println("\n");
 
                 opcion = Integer.parseInt(sc.nextLine().trim());
-                switch (opcion) {
+                                switch (opcion) {
                     case 1:
                         cliente.opcionesCliente(sc);
                         break;
@@ -50,19 +53,26 @@ public class Main {
                     case 3:
                         
                         break;
+                    */
                     case 4:
-                        
+                        opcionesMantenimiento(sc);
                         break;
-                        */
                     case 5:
                         break;
                     
                     default:
                         System.out.println("Opción inválida.");
+
             
                 } // fin switch
         
             } // fin while
+        }
+
+
+        private void opcionesMantenimiento(Scanner sc) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'opcionesMantenimiento'");
         }
 
     }
@@ -270,4 +280,109 @@ class Auto {
                 id, marca, modelo, anio, precio, vendido ? "[VENDIDO]" : "");
     }
 }
+
+------------------------------------------------------------------------------
+Opcion mantenimiento
+
+        private void opcionesMantenimiento(Scanner sc) {
+            int opcionMant = 0;
+
+            while (opcionMant != 5) {
+                System.out.println("\n--- Opciones de mantenimiento ---");
+                System.out.println("1. Registrar mantenimiento");
+                System.out.println("2. Mostrar todos los mantenimientos");
+                System.out.println("3. Buscar mantenimiento por ID");
+                System.out.println("4. Eliminar mantenimiento");
+                System.out.println("5. Volver");
+                System.out.print("Elija una opción: ");
+
+                opcionMant = Integer.parseInt(sc.nextLine().trim());
+
+                switch (opcionMant) {
+                    case 1: {
+                        System.out.println("\n--- Registrar mantenimiento ---");
+                        System.out.print("ID del mantenimiento: ");
+                        int id = Integer.parseInt(sc.nextLine().trim());
+
+                        System.out.print("Descripción: ");
+                        String descripcion = sc.nextLine();
+
+                        System.out.print("Fecha (dd/mm/aaaa): ");
+                        String fecha = sc.nextLine();
+
+                        System.out.print("Costo base: ");
+                        double costo = Double.parseDouble(sc.nextLine().trim());
+
+                        Mantenimiento m = new Mantenimiento(id, descripcion, fecha, costo);
+                        listaMantenimientos.add(m);
+
+                        System.out.println("Mantenimiento registrado correctamente.");
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("\n--- Lista de mantenimientos ---");
+                        if (listaMantenimientos.isEmpty()) {
+                            System.out.println("No hay mantenimientos registrados.");
+                        } else {
+                            for (Mantenimiento m : listaMantenimientos) {
+                                System.out.println(m);
+                                System.out.println("-------------------------");
+                            }
+                        }
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("\n--- Buscar mantenimiento por ID ---");
+                        System.out.print("Ingrese ID: ");
+                        int idBuscado = Integer.parseInt(sc.nextLine().trim());
+
+                        Mantenimiento encontrado = null;
+                        for (Mantenimiento m : listaMantenimientos) {
+                            if (m.getIdMantenimiento() == idBuscado) {
+                                encontrado = m;
+                                break;
+                            }
+                        }
+
+                        if (encontrado != null) {
+                            System.out.println("Mantenimiento encontrado:");
+                            System.out.println(encontrado);
+                        } else {
+                            System.out.println("No existe un mantenimiento con ese ID.");
+                        }
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("\n--- Eliminar mantenimiento ---");
+                        System.out.print("Ingrese ID: ");
+                        int idEliminar = Integer.parseInt(sc.nextLine().trim());
+
+                        boolean eliminado = false;
+                        for (int i = 0; i < listaMantenimientos.size(); i++) {
+                            if (listaMantenimientos.get(i).getIdMantenimiento() == idEliminar) {
+                                listaMantenimientos.remove(i);
+                                eliminado = true;
+                                break;
+                            }
+                        }
+
+                        if (eliminado) {
+                            System.out.println("Mantenimiento eliminado correctamente.");
+                        } else {
+                            System.out.println("No se encontró un mantenimiento con ese ID.");
+                        }
+                        break;
+                    }
+                    case 5:
+                        System.out.println("Volviendo al menú principal...");
+                        break;
+                    default:
+                        System.out.println("Opción inválida.");
+                }
+            }
+        }
+
+
+
+
     */
