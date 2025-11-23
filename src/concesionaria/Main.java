@@ -4,26 +4,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        Cliente cliente = new Cliente(12345678, "Juan", "Perez", "Calle Falsa 123", "123456789", "juan.perez@example.com");
-        // Registramos el cliente inicial en la lista central de clientes
-        Cliente.getListaClientes().add(cliente);
-
-        // menú principal con opciones para gestionar clientes por ahora
-        // pasar la instancia de cliente al Menú principal
-        new Main().new Menus(cliente).mostrarMenuPrincipal();
-
+        // --------------- Menú Principal ---------------
+        Menus.mostrarMenuPrincipal();
         System.out.println("Programa finalizado.");
     }
 
-    class Menus {
-        private final Cliente cliente;
+    static class Menus {
 
-        Menus(Cliente cliente) {
-            this.cliente = cliente;
-        }
-
-        public void mostrarMenuPrincipal() {
+        public static void mostrarMenuPrincipal() {
+            Cliente.cargarClientesDesdeArchivo("clientes.txt"); // Cargar clientes al iniciar el programa
             Scanner sc = new Scanner(System.in);
             int opcion = 0;
 
@@ -45,23 +34,22 @@ public class Main {
 
                 switch (opcion) {
                     case 1:
-                        cliente.opcionesCliente(sc);
-                        break;
-                        case 2:
-                             new MenuAutos().mostrarMenu(sc);
-                              break;
+                    Cliente.opcionesCliente(sc);
+                    break;
 
-                              case 3:
-                              new MenuVentas().mostrarMenu(sc);
-                             break;
+                    case 2:
+                    new MenuAutos().mostrarMenu(sc);
+                    break;
 
-                             case 4:
-                             new MenuMantenimiento().mostrarMenu(sc);
-                             break;
+                    case 3:
+                    new MenuVentas().mostrarMenu(sc);
+                    break;
 
-                       
-                 
-                        
+                    case 4:
+                    new MenuMantenimiento().mostrarMenu(sc);
+                    break;
+
+
                     case 5:
                         break;
 

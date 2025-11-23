@@ -1,49 +1,69 @@
 package concesionaria;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuMantenimiento {
+public class MenuVentas {
 
     public void mostrarMenu(Scanner sc) {
 
-        System.out.println("\n--- REGISTRAR MANTENIMIENTO ---");
-
-        System.out.print("ID mantenimiento: ");
-        int id = Integer.parseInt(sc.nextLine());
-
-        System.out.print("Descripción: ");
-        String desc = sc.nextLine();
-
-        System.out.print("Fecha: ");
-        String fecha = sc.nextLine();
-
-        System.out.print("Costo base: ");
-        double costo = Double.parseDouble(sc.nextLine());
-
         if (Concesionaria.listaAutos.isEmpty()) {
-            System.out.println("No hay autos cargados.");
+            System.out.println("No hay autos para vender.");
             return;
         }
 
-        System.out.println("Autos disponibles:");
+        if (Cliente.getListaClientes().isEmpty()) {
+            System.out.println("No hay clientes cargados.");
+            return;
+        }
+
+        System.out.println("\n--- NUEVA VENTA ---");
+
+        System.out.println("Clientes disponibles:");
+        for (Cliente c : Cliente.getListaClientes())
+            System.out.println(c.getDNI() + " - " + c.getNombre());
+
+        System.out.print("Ingrese el DNI del cliente: ");
+        int dni = Integer.parseInt(sc.nextLine());
+
+        Cliente cliente = null;
+        for (Cliente c : Cliente.getListaClientes())
+            if (c.getDNI() == dni) cliente = c;
+
+        if (cliente == null) {
+            System.out.println("Cliente no encontrado.");
+            return;
+        }
+
+        System.out.println("\nAutos disponibles:");
         for (Auto a : Concesionaria.listaAutos)
             System.out.println(a);
 
-        System.out.print("Patente del vehículo: ");
-        int pat = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese patente del auto a vender: ");
+        String pat = sc.nextLine();
 
-        Vehiculo veh = null;
-        for (Auto a : Concesionaria.listaAutos)
-            if (a.getPatente() == pat) veh = a;
-
-        if (veh == null) {
-            System.out.println("Vehículo inexistente.");
+        Auto auto = null;
+        for (Auto a : Concesionaria.listaAutos) 
+            if (a.getPatente().equals(pat)) auto = a;
+        if (auto == null) {
+            System.out.println("Auto inexistente.");
             return;
         }
 
-        Mantenimiento m = new Mantenimiento(id, desc, fecha, costo, veh);
-        Concesionaria.listaMantenimientos.add(m);
+        // Crear detalle de venta
+        DetalleVenta dv = new DetalleVenta(auto, 1);
+        ArrayList<DetalleVenta> detalles = new ArrayList<>();
+        detalles.add(dv);
 
-        System.out.println("Mantenimiento registrado correctamente.");
+        // Vendedor ficticio por ahora
+        EmpleadoVenta vendedor = new EmpleadoVenta(
+            55555555, "Carlos", "Gómez", "Calle", "111", "mail@mail.com",
+            1, 250000, 0.06
+        );
+
+        Venta venta = new Venta(vendedor, cliente, detalles);
+
+        System.out.println("\nVenta registrada exitosamente.");
+        System.out.println("Total Final: $" + venta.getTotalFinal());
     }
 }

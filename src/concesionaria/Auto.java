@@ -6,7 +6,7 @@ public class Auto extends Vehiculo {
     private String tipo;
 
     // Constructor
-    public Auto(int patente, String marca, String modelo, int anio, String estado, double precio, int cantidadPuertas, String tipo) {
+    public Auto(String patente, String marca, String modelo, int anio, String estado, double precio, int cantidadPuertas, String tipo) {
         super(patente, marca, modelo, anio, estado, precio);
         this.cantidadPuertas = cantidadPuertas;
         this.tipo = tipo;
