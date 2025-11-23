@@ -9,7 +9,7 @@ public class Venta {
     private ArrayList<DetalleVenta> detalles;
     private double totalFinal;
 
-    
+
     public Venta(EmpleadoVenta vendedor, Cliente cliente, ArrayList<DetalleVenta> detalles) {
         this.vendedor = vendedor;
         this.cliente = cliente;
@@ -41,7 +41,7 @@ public class Venta {
         return detalles;
     }
 
-    
+
     public double getTotalFinal() {
         return totalFinal;
     }

@@ -8,7 +8,7 @@ public class Persona {
     String Telefono;
     String Email;
 
-   
+    //Persona (DNI, NomYApe, FechaNacimiento, Telefono, Direccion)
     //constructor
     public Persona(int DNI, String Nombre, String Apellido, String Direccion, String Telefono, String Email) {
         this.DNI = DNI;

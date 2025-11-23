@@ -30,12 +30,11 @@ public class MenuMantenimiento {
             System.out.println(a);
 
         System.out.print("Patente del vehículo: ");
-        int pat = Integer.parseInt(sc.nextLine());
+        String pat = sc.nextLine();
 
         Vehiculo veh = null;
         for (Auto a : Concesionaria.listaAutos)
-            if (a.getPatente() == pat) veh = a;
-
+            if (a.getPatente().equals(pat)) veh = a;
         if (veh == null) {
             System.out.println("Vehículo inexistente.");
             return;

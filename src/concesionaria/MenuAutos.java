@@ -22,7 +22,7 @@ public class MenuAutos {
 
                 case "1":
                     System.out.print("Patente: ");
-                    int patente = Integer.parseInt(sc.nextLine());
+                    String patente = sc.nextLine();
 
                     System.out.print("Marca: ");
                     String marca = sc.nextLine();
@@ -55,18 +55,21 @@ public class MenuAutos {
                     if (Concesionaria.listaAutos.isEmpty()) {
                         System.out.println("No hay autos cargados.");
                     } else {
-                        for (Auto a : Concesionaria.listaAutos)
-                            System.out.println(a);
-                    }
+                        System.out.println("--------------------- Listado de autos ----------------------");
+                        int i = 1;
+                        for (Auto a : Concesionaria.listaAutos) {
+                            System.out.println(i + ". Patente: " + a.getPatente() + ", Marca: " + a.getMarca() + ", Modelo: " + a.getModelo() + ", Año: " + a.getAnio() + ", Estado: " + a.getEstado() + ", Precio: $" + a.getPrecio() + ", Puertas: " + a.getCantidadPuertas() + ", Tipo: " + a.getTipo());
+                            i++;
+                        }
                     break;
 
                 case "3":
                     System.out.print("Ingrese patente: ");
-                    int patBuscar = Integer.parseInt(sc.nextLine());
+                    String patBuscar = sc.nextLine();
                     Auto encontrado = null;
 
                     for (Auto a : Concesionaria.listaAutos) {
-                        if (a.getPatente() == patBuscar)
+                        if (a.getPatente().equals(patBuscar))
                             encontrado = a;
                     }
 
@@ -75,9 +78,9 @@ public class MenuAutos {
 
                 case "4":
                     System.out.print("Patente a eliminar: ");
-                    int patEliminar = Integer.parseInt(sc.nextLine());
+                    String patEliminar = sc.nextLine();
 
-                    boolean eliminado = Concesionaria.listaAutos.removeIf(a -> a.getPatente() == patEliminar);
+                    boolean eliminado = Concesionaria.listaAutos.removeIf(a -> a.getPatente().equals(patEliminar));
                     System.out.println(eliminado ? "Auto eliminado." : "No existe.");
                     break;
 
@@ -86,7 +89,8 @@ public class MenuAutos {
 
                 default:
                     System.out.println("Opción inválida.");
-            }
-        }
-    }
-}
+                }
+            }//fin switch         
+        }//fin while
+    }//fin mostrarMenu
+}//fin clase MenuAuto

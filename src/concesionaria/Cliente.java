@@ -1,12 +1,15 @@
 package concesionaria;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Cliente extends Persona {
 
-    // Lista centralizada de clientes registrados
+    // Lista centralizada de clientes (estática)
     private static final ArrayList<Cliente> listaClientes = new ArrayList<>();
 
     // constructor
@@ -14,7 +17,7 @@ public class Cliente extends Persona {
         super(DNI, Nombre, Apellido, Direccion, Telefono, Email);
     }
 
-    // Getter para la lista 
+    // Getter para la lista (solo lectura/modificación mediante métodos de la clase)
     public static List<Cliente> getListaClientes() {
         return listaClientes;
     }
@@ -35,7 +38,7 @@ public class Cliente extends Persona {
         return Integer.hashCode(this.getDNI());
     }
 
-    // funcion para limpiar pantalla 
+    // funcion para limpiar pantalla (quedó así nomas)
     public final static void limpiarPantalla() {
         try {
             final String os = System.getProperty("os.name");
@@ -46,28 +49,29 @@ public class Cliente extends Persona {
                 new ProcessBuilder("clear").inheritIO().start().waitFor();
             }
         } catch (final Exception e) {
-            // Manejo de excepciones
+            // Handle any exceptions, e.g., print stack trace or log the error
             e.printStackTrace();
         }
     }
 
     // ------------- METODOS DE CLIENTE --------------------
 
-    public void ListarClientes() {
+    public static void ListarClientes() {
         if (listaClientes.isEmpty()) {
             System.out.println("\nNo hay clientes registrados.\n");
             return;
         } else {
             System.out.println("\n----------- Lista de Clientes -------------\n");
             for (Cliente cliente : listaClientes) {
-                System.out.println("DNI: " + cliente.getDNI() + ", Nombre: " + cliente.getNombre() + ", Apellido: " + cliente.getApellido()
+                System.out.println("DNI: " + cliente.getDNI() + ", Nombre completo: " + cliente.getNombre() + " " + cliente.getApellido()
                         + ", Direccion: " + cliente.getDireccion() + ", Telefono: " + cliente.getTelefono() + ", Email: "
                         + cliente.getEmail());
             }
+            Cliente.guardarClientesEnArchivo("clientes.txt");
         }
     }
 
-    public Cliente buscarCliente(int DNI_Buscado) {
+    public static Cliente buscarCliente(int DNI_Buscado) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getDNI() == DNI_Buscado) {
                 return cliente;
@@ -77,7 +81,7 @@ public class Cliente extends Persona {
         return null;
     }
 
-    public void modificarCliente(Scanner scanner) {
+    public static void modificarCliente(Scanner scanner) {
         System.out.print("Ingrese el DNI del cliente a modificar: ");
         int dniModificar = Integer.parseInt(scanner.nextLine().trim());
         Cliente encontrado = buscarCliente(dniModificar);
@@ -90,12 +94,14 @@ public class Cliente extends Persona {
             System.out.print("Ingrese el nuevo email: ");
             encontrado.setEmail(scanner.nextLine().trim());
             System.out.println("Cliente modificado con éxito.");
+            Cliente.guardarClientesEnArchivo("clientes.txt");
+            
             return;
         }
         System.out.println("Cliente con DNI " + dniModificar + " no encontrado.");
     }
 
-    public void agregarCliente(Scanner scanner) {
+    public static void agregarCliente(Scanner scanner) {
         System.out.print("Ingrese DNI: ");
         int dni = Integer.parseInt(scanner.nextLine().trim());
 
@@ -112,10 +118,11 @@ public class Cliente extends Persona {
 
         Cliente nuevoCliente = new Cliente(dni, nombre, apellido, direccion, telefono, email);
         listaClientes.add(nuevoCliente);
-        System.out.println("Cliente agregado con éxito.");
+        System.out.println("\nCliente agregado con éxito.");
+        Cliente.guardarClientesEnArchivo("clientes.txt");
     }
 
-    public void eliminarCliente(Scanner scanner) {
+    public static void eliminarCliente(Scanner scanner) {
         System.out.print("Ingrese el DNI del cliente a eliminar: ");
         int dniEliminar = Integer.parseInt(scanner.nextLine().trim());
 
@@ -125,10 +132,11 @@ public class Cliente extends Persona {
         } else { // Si no se encontró ningún cliente con ese DNI
             System.out.println("Cliente con DNI " + dniEliminar + " no encontrado.");
         }
+        Cliente.guardarClientesEnArchivo("clientes.txt");
     }
 
     // Metodo de Opciones de cliente
-    public void opcionesCliente(Scanner scanner) {
+    public static void opcionesCliente(Scanner scanner) {
         while (true) {
             System.out.println("Opciones de cliente:");
             System.out.println("1. Listar clientes");
@@ -153,7 +161,7 @@ public class Cliente extends Persona {
                     Cliente c = buscarCliente(dniBuscar);
                     if (c != null) {
                         System.out.println("Cliente encontrado:\n");
-                        System.out.println("DNI: " + c.getDNI() + ", Nombre: " + c.getNombre() + ", Apellido: " + c.getApellido() + ", Direccion: " + c.getDireccion() + ", Telefono: " + c.getTelefono() + ", Email: " + c.getEmail());
+                        System.out.println("DNI: " + c.getDNI() + ", Nombre: " + c.getNombre() + " " + c.getApellido() + ", Direccion: " + c.getDireccion() + ", Telefono: " + c.getTelefono() + ", Email: " + c.getEmail());
                     }
                     break;
                 case "3":
@@ -173,11 +181,11 @@ public class Cliente extends Persona {
                     return; // Salir del método y volver al menú principal
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
-            } 
-        } 
-    }
+            } // fin switch
+        } // fin while
+    } // fin opcionesCliente
 
-    // Métodos auxiliares para actualizar datos del cliente
+    // Métodos auxiliares para actualizar datos (encapsulación)
     public void setDireccion(String direccion) {
         this.Direccion = direccion;
     }
@@ -189,4 +197,53 @@ public class Cliente extends Persona {
     public void setEmail(String email) {
         this.Email = email;
     }
+
+    // ------------------ Metodos para guardar y cargar desde archivo -------------------
+    public static void guardarClientesEnArchivo(String nombreArchivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (Cliente cliente : listaClientes) {
+                String linea = cliente.getDNI() + "," + cliente.getNombre() + "," + cliente.getApellido() + "," +
+                        cliente.getDireccion() + "," + cliente.getTelefono() + "," + cliente.getEmail();
+                writer.write(linea);
+                writer.newLine();
+            }
+            System.out.println("Clientes guardados en el archivo correctamente.");
+        } catch (IOException e) {
+            System.out.println("Error al guardar los clientes en el archivo: " + e.getMessage());
+        }
+    }
+
+    public static void cargarClientesDesdeArchivo(String nombreArchivo) {
+        try (Scanner fileScanner = new Scanner(new java.io.File(nombreArchivo))) {
+            while (fileScanner.hasNextLine()) {
+                String linea = fileScanner.nextLine();
+                String[] datos = linea.split(",");
+                if (datos.length == 6) {
+                    int dni = Integer.parseInt(datos[0]);
+                    String nombre = datos[1];
+                    String apellido = datos[2];
+                    String direccion = datos[3];
+                    String telefono = datos[4];
+                    String email = datos[5];
+
+                    Cliente cliente = new Cliente(dni, nombre, apellido, direccion, telefono, email);
+                    listaClientes.add(cliente);
+                }
+            }
+            System.out.println("Clientes cargados desde el archivo correctamente.");
+        } catch (IOException e) {
+            System.out.println("Error al cargar los clientes desde el archivo: " + e.getMessage());
+        }
+    }
+    
+
 }
+
+
+
+
+
+
+
+
+

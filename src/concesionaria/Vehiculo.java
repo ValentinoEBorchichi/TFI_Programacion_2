@@ -3,7 +3,7 @@ package concesionaria;
 import java.util.Objects;
 
 abstract public class Vehiculo {
-    private int patente;
+    private String patente;
     private String marca;
     private String modelo;
     private int anio;
@@ -11,7 +11,7 @@ abstract public class Vehiculo {
     private double precio;
 
     // Constructor
-    public Vehiculo(int patente, String marca, String modelo, int anio, String estado, double precio) {
+    public Vehiculo(String patente, String marca, String modelo, int anio, String estado, double precio) {
         this.patente = patente;
         this.marca = marca;
         this.modelo = modelo;
@@ -21,8 +21,8 @@ abstract public class Vehiculo {
     }
 
     // Getters y setters
-    public int getPatente() { return patente; }
-    public void setPatente(int patente) { this.patente = patente; }
+    public String getPatente() { return patente; }
+    public void setPatente(String patente) { this.patente = patente; }
 
     public String getMarca() { return marca; }
     public void setMarca(String marca) { this.marca = marca; }
@@ -56,7 +56,7 @@ abstract public class Vehiculo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vehiculo vehiculo = (Vehiculo) o;
-        return patente == vehiculo.patente;
+        return patente.equals(vehiculo.patente);
     }
 
     @Override

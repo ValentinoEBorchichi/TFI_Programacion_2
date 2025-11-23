@@ -40,12 +40,11 @@ public class MenuVentas {
             System.out.println(a);
 
         System.out.print("Ingrese patente del auto a vender: ");
-        int pat = Integer.parseInt(sc.nextLine());
+        String pat = sc.nextLine();
 
         Auto auto = null;
-        for (Auto a : Concesionaria.listaAutos)
-            if (a.getPatente() == pat) auto = a;
-
+        for (Auto a : Concesionaria.listaAutos) 
+            if (a.getPatente().equals(pat)) auto = a;
         if (auto == null) {
             System.out.println("Auto inexistente.");
             return;
