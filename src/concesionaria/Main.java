@@ -49,7 +49,6 @@ public class Main {
                     new MenuMantenimiento().mostrarMenu(sc);
                     break;
 
-
                     case 5:
                         break;
 

@@ -198,6 +198,12 @@ public class Cliente extends Persona {
         this.Email = email;
     }
 
+    //Interface Identificador
+  
+
+
+
+
     // ------------------ Metodos para guardar y cargar desde archivo -------------------
     public static void guardarClientesEnArchivo(String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
