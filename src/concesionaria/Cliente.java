@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,7 +41,7 @@ public class Cliente extends Persona implements Comparable<Cliente> {
 
     @Override
     public int compareTo(Cliente otro) {
-    return Integer.compare(this.getDNI(), otro.getDNI());
+    return this.getApellido().compareToIgnoreCase(otro.getApellido());
 }
 
 
@@ -63,19 +64,25 @@ public class Cliente extends Persona implements Comparable<Cliente> {
     // ------------- METODOS DE CLIENTE --------------------
 
     public static void ListarClientes() {
-        if (listaClientes.isEmpty()) {
-            System.out.println("\nNo hay clientes registrados.\n");
-            return;
-        } else {
-            System.out.println("\n----------- Lista de Clientes -------------\n");
-            for (Cliente cliente : listaClientes) {
-                System.out.println("DNI: " + cliente.getDNI() + ", Nombre completo: " + cliente.getNombre() + " " + cliente.getApellido()
-                        + ", Direccion: " + cliente.getDireccion() + ", Telefono: " + cliente.getTelefono() + ", Email: "
-                        + cliente.getEmail());
-            }
-            Cliente.guardarClientesEnArchivo("clientes.txt");
-        }
+    if (listaClientes.isEmpty()) {
+        System.out.println("\nNo hay clientes registrados.\n");
+        return;
+    } else {
+        Collections.sort(listaClientes);
+
+        System.out.println("\n----------- Lista de Clientes -------------\n");
+        listaClientes.forEach(cliente -> {
+            System.out.println("DNI: " + cliente.getDNI()
+                    + ", Nombre completo: " + cliente.getNombre() + " " + cliente.getApellido()
+                    + ", Direccion: " + cliente.getDireccion()
+                    + ", Telefono: " + cliente.getTelefono()
+                    + ", Email: " + cliente.getEmail());
+        });
+
+        Cliente.guardarClientesEnArchivo("clientes.txt");
     }
+}
+
 
     public static Cliente buscarCliente(int DNI_Buscado) {
         for (Cliente cliente : listaClientes) {

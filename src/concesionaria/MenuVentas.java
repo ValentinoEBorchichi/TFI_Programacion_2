@@ -22,6 +22,7 @@ public class MenuVentas {
 
         System.out.println("Clientes disponibles:");
         Collections.sort(Cliente.getListaClientes());
+        Cliente.getListaClientes().forEach(System.out::println);
 
         for (Cliente c : Cliente.getListaClientes())
             System.out.println(c.getDNI() + " - " + c.getNombre());
