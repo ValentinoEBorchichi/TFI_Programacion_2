@@ -3,6 +3,12 @@ package concesionaria;
 import java.util.Scanner;
 
 public class MenuAutos {
+    
+    // Definición de la interfaz funcional
+    @FunctionalInterface 
+        public interface FiltroAuto {   //sirve para filtrar autos por cualquiera de sus atributos
+            boolean filtrar(Auto a);
+        }
 
     public void mostrarMenu(Scanner sc) {
 
@@ -13,7 +19,9 @@ public class MenuAutos {
             System.out.println("2. Listar autos");
             System.out.println("3. Buscar auto por patente");
             System.out.println("4. Eliminar auto");
-            System.out.println("5. Volver");
+            System.out.println("5. Filtrar autos por Marca");
+            System.out.println("6. Volver al menú principal");
+
 
             System.out.print("Seleccione opción: ");
             String op = sc.nextLine().trim();
@@ -63,6 +71,7 @@ public class MenuAutos {
                         }
                     }
                     break;
+                    
 
                 case "3":
                     System.out.print("Ingrese patente: ");
@@ -84,14 +93,41 @@ public class MenuAutos {
                     boolean eliminado = Concesionaria.listaAutos.removeIf(a -> a.getPatente().equals(patEliminar));
                     System.out.println(eliminado ? "Auto eliminado." : "No existe.");
                     break;
-
+  
                 case "5":
+                    System.out.print("Ingrese la marca a filtrar: ");
+                    String marcaFiltro = sc.nextLine().trim();
+
+                    // Implementación de la interfaz funcional con expresión lambda
+                    FiltroAuto filtroPorMarca = a -> a.getMarca().equalsIgnoreCase(marcaFiltro);
+                    boolean alguno = false;
+                    System.out.println("----- Autos filtrados por marca: " + marcaFiltro + " -----");
+
+                    for (Auto a : Concesionaria.listaAutos) {
+                        if (filtroPorMarca.filtrar(a)) {
+                            System.out.println("Patente: " + a.getPatente() +
+                                            ", Marca: " + a.getMarca() +
+                                            ", Modelo: " + a.getModelo() +
+                                            ", Año: " + a.getAnio() +
+                                            ", Estado: " + a.getEstado() +
+                                            ", Precio: $" + a.getPrecio() +
+                                            ", Puertas: " + a.getCantidadPuertas() +
+                                            ", Tipo: " + a.getTipo());
+                            alguno = true;
+                        }
+                    }
+
+                    if (!alguno)
+                        System.out.println("No se encontraron autos con esa marca.");
+
+                    break;
+
+                case "6":
                     return;
 
                 default:
                     System.out.println("Opción inválida.");
                 }
-            }//fin switch         
-        }//fin while
-    }//fin mostrarMenu
-    // //fin clase MenuAuto
+            }       
+        }
+    }
