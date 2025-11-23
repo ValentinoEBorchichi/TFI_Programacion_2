@@ -1,6 +1,7 @@
 package concesionaria;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MenuVentas {
@@ -20,6 +21,8 @@ public class MenuVentas {
         System.out.println("\n--- NUEVA VENTA ---");
 
         System.out.println("Clientes disponibles:");
+        Collections.sort(Cliente.getListaClientes());
+
         for (Cliente c : Cliente.getListaClientes())
             System.out.println(c.getDNI() + " - " + c.getNombre());
 
