@@ -58,7 +58,7 @@ public class MenuAutos {
                         System.out.println("--------------------- Listado de autos ----------------------");
                         int i = 1;
                         for (Auto a : Concesionaria.listaAutos) {
-                            System.out.println(i + ". Patente: " + a.getPatente() + ", Marca: " + a.getMarca() + ", Modelo: " + a.getModelo() + ", Año: " + a.getAnio() + ", Estado: " + a.getEstado() + ", Precio: $" + a.getPrecio() + ", Puertas: " + a.getCantidadPuertas() + ", Tipo: " + a.getTipo());
+                            System.out.println(i + " Patente: " + a.getPatente() + ", Marca: " + a.getMarca() + ", Modelo: " + a.getModelo() + ", Año: " + a.getAnio() + ", Estado: " + a.getEstado() + ", Precio: $" + a.getPrecio() + ", Puertas: " + a.getCantidadPuertas() + ", Tipo: " + a.getTipo());
                             i++;
                         }
                     }

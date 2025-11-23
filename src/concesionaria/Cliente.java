@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Cliente extends Persona {
-
+public class Cliente extends Persona implements Comparable<Cliente> {
+    
     // Lista centralizada de clientes (estática)
     private static final ArrayList<Cliente> listaClientes = new ArrayList<>();
 
@@ -37,6 +37,12 @@ public class Cliente extends Persona {
     public int hashCode() {
         return Integer.hashCode(this.getDNI());
     }
+
+    @Override
+    public int compareTo(Cliente otro) {
+    return Integer.compare(this.getDNI(), otro.getDNI());
+}
+
 
     // funcion para limpiar pantalla (quedó así nomas)
     public final static void limpiarPantalla() {
@@ -238,9 +244,6 @@ public class Cliente extends Persona {
     
 
 }
-
-
-
 
 
 
