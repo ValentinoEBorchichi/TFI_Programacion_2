@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Cliente extends Persona {
 
-    // Lista centralizada de clientes (estática)
+    // Lista centralizada de clientes registrados
     private static final ArrayList<Cliente> listaClientes = new ArrayList<>();
 
     // constructor
@@ -14,7 +14,7 @@ public class Cliente extends Persona {
         super(DNI, Nombre, Apellido, Direccion, Telefono, Email);
     }
 
-    // Getter para la lista (solo lectura/modificación mediante métodos de la clase)
+    // Getter para la lista 
     public static List<Cliente> getListaClientes() {
         return listaClientes;
     }
@@ -35,7 +35,7 @@ public class Cliente extends Persona {
         return Integer.hashCode(this.getDNI());
     }
 
-    // funcion para limpiar pantalla (la dejé igual)
+    // funcion para limpiar pantalla 
     public final static void limpiarPantalla() {
         try {
             final String os = System.getProperty("os.name");
@@ -46,7 +46,7 @@ public class Cliente extends Persona {
                 new ProcessBuilder("clear").inheritIO().start().waitFor();
             }
         } catch (final Exception e) {
-            // Handle any exceptions, e.g., print stack trace or log the error
+            // Manejo de excepciones
             e.printStackTrace();
         }
     }
@@ -173,11 +173,11 @@ public class Cliente extends Persona {
                     return; // Salir del método y volver al menú principal
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
-            } // fin switch
-        } // fin while
-    } // fin opcionesCliente
+            } 
+        } 
+    }
 
-    // Métodos auxiliares para actualizar datos (encapsulación)
+    // Métodos auxiliares para actualizar datos del cliente
     public void setDireccion(String direccion) {
         this.Direccion = direccion;
     }

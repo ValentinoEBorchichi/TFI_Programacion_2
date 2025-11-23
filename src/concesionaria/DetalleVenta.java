@@ -24,7 +24,7 @@ public class DetalleVenta {
         return subtotal;
     }
 
-    // Método requerido por Venta (lo llamabais getSubtotalNeto)
+    // Método requerido por Venta para calcular el subtotal neto
     public double getSubtotalNeto() {
         return subtotal;
     }

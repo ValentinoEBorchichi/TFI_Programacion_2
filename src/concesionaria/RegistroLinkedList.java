@@ -2,9 +2,9 @@ package concesionaria;
 
 import java.util.Iterator;
 
-/**
- * Estructura propia simple: lista enlazada para registro de operaciones (Strings)
- */
+
+ // lista enlazada para registro de operaciones
+ 
 public class RegistroLinkedList implements Iterable<String> {
     private static class Node {
         String value;
