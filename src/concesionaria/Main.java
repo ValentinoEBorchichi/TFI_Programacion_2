@@ -48,17 +48,18 @@ public class Main {
                         cliente.opcionesCliente(sc);
                         break;
                         case 2:
-                            new MenuAutos().mostrarMenu(sc);
-                               break;
-
-                            case 3:
-                             new MenuVentas().mostrarMenu(sc);
+                             new MenuAutos().mostrarMenu(sc);
                               break;
 
-                            case 4:
+                              case 3:
+                              new MenuVentas().mostrarMenu(sc);
+                             break;
+
+                             case 4:
                              new MenuMantenimiento().mostrarMenu(sc);
-                              break;
+                             break;
 
+                       
                  
                         
                     case 5:
