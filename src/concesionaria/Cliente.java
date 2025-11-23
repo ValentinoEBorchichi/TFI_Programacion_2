@@ -1,17 +1,23 @@
-package src.concesionaria;
+package concesionaria;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Cliente extends Persona {
 
-    // Clientes (hereda de Persona)
+    // Lista centralizada de clientes (estática)
+    private static final ArrayList<Cliente> listaClientes = new ArrayList<>();
+
     // constructor
     public Cliente(int DNI, String Nombre, String Apellido, String Direccion, String Telefono, String Email) {
         super(DNI, Nombre, Apellido, Direccion, Telefono, Email);
     }
 
-    ArrayList<Cliente> listaClientes = new ArrayList<>();
+    // Getter para la lista (solo lectura/modificación mediante métodos de la clase)
+    public static List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
 
     // override de equals y hashcode para comparar clientes por DNI
     @Override
@@ -21,15 +27,15 @@ public class Cliente extends Persona {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Cliente cliente = (Cliente) obj;
-        return this.DNI == cliente.DNI;
+        return this.getDNI() == cliente.getDNI();
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(this.DNI);
+        return Integer.hashCode(this.getDNI());
     }
 
-    // funcion para limpiar pantalla
+    // funcion para limpiar pantalla (la dejé igual)
     public final static void limpiarPantalla() {
         try {
             final String os = System.getProperty("os.name");
@@ -45,30 +51,25 @@ public class Cliente extends Persona {
         }
     }
 
-
     // ------------- METODOS DE CLIENTE --------------------
 
     public void ListarClientes() {
-        
         if (listaClientes.isEmpty()) {
             System.out.println("\nNo hay clientes registrados.\n");
             return;
         } else {
             System.out.println("\n----------- Lista de Clientes -------------\n");
             for (Cliente cliente : listaClientes) {
-                System.out.println("DNI: " + cliente.DNI + ", Nombre: " + cliente.Nombre + ", Apellido: " + cliente.Apellido
-                        + ", Direccion: " + cliente.Direccion + ", Telefono: " + cliente.Telefono + ", Email: "
-                        + cliente.Email);
+                System.out.println("DNI: " + cliente.getDNI() + ", Nombre: " + cliente.getNombre() + ", Apellido: " + cliente.getApellido()
+                        + ", Direccion: " + cliente.getDireccion() + ", Telefono: " + cliente.getTelefono() + ", Email: "
+                        + cliente.getEmail());
             }
         }
     }
 
     public Cliente buscarCliente(int DNI_Buscado) {
         for (Cliente cliente : listaClientes) {
-            if (cliente.DNI == DNI_Buscado) {
-                // System.out.println("DNI: " + cliente.DNI + ", Nombre: " + cliente.Nombre + ",
-                // Apellido: " + cliente.Apellido + ", Direccion: " + cliente.Direccion + ",
-                // Telefono: " + cliente.Telefono + ", Email: " + cliente.Email);
+            if (cliente.getDNI() == DNI_Buscado) {
                 return cliente;
             }
         }
@@ -77,18 +78,17 @@ public class Cliente extends Persona {
     }
 
     public void modificarCliente(Scanner scanner) {
-        
         System.out.print("Ingrese el DNI del cliente a modificar: ");
         int dniModificar = Integer.parseInt(scanner.nextLine().trim());
         Cliente encontrado = buscarCliente(dniModificar);
 
         if (encontrado != null) {
             System.out.print("Ingrese la nueva direccion: ");
-            encontrado.Direccion = scanner.nextLine().trim();
+            encontrado.setDireccion(scanner.nextLine().trim());
             System.out.print("Ingrese el nuevo telefono: ");
-            encontrado.Telefono = scanner.nextLine().trim();
+            encontrado.setTelefono(scanner.nextLine().trim());
             System.out.print("Ingrese el nuevo email: ");
-            encontrado.Email = scanner.nextLine().trim();
+            encontrado.setEmail(scanner.nextLine().trim());
             System.out.println("Cliente modificado con éxito.");
             return;
         }
@@ -119,7 +119,7 @@ public class Cliente extends Persona {
         System.out.print("Ingrese el DNI del cliente a eliminar: ");
         int dniEliminar = Integer.parseInt(scanner.nextLine().trim());
 
-        boolean eliminado = listaClientes.removeIf(cliente -> cliente.DNI == dniEliminar);
+        boolean eliminado = listaClientes.removeIf(cliente -> cliente.getDNI() == dniEliminar);
         if (eliminado) { // Si se eliminó algún cliente
             System.out.println("Cliente eliminado con éxito.");
         } else { // Si no se encontró ningún cliente con ese DNI
@@ -153,7 +153,7 @@ public class Cliente extends Persona {
                     Cliente c = buscarCliente(dniBuscar);
                     if (c != null) {
                         System.out.println("Cliente encontrado:\n");
-                        System.out.println("DNI: " + c.DNI + ", Nombre: " + c.Nombre + ", Apellido: " + c.Apellido + ", Direccion: " + c.Direccion + ", Telefono: " + c.Telefono + ", Email: " + c.Email);
+                        System.out.println("DNI: " + c.getDNI() + ", Nombre: " + c.getNombre() + ", Apellido: " + c.getApellido() + ", Direccion: " + c.getDireccion() + ", Telefono: " + c.getTelefono() + ", Email: " + c.getEmail());
                     }
                     break;
                 case "3":
@@ -175,7 +175,18 @@ public class Cliente extends Persona {
                     System.out.println("Opción inválida. Intente nuevamente.");
             } // fin switch
         } // fin while
-
     } // fin opcionesCliente
 
+    // Métodos auxiliares para actualizar datos (encapsulación)
+    public void setDireccion(String direccion) {
+        this.Direccion = direccion;
+    }
+
+    public void setTelefono(String telefono) {
+        this.Telefono = telefono;
+    }
+
+    public void setEmail(String email) {
+        this.Email = email;
+    }
 }
