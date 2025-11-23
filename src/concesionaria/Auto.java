@@ -1,11 +1,12 @@
 package concesionaria;
 
 public class Auto extends Vehiculo {
+
     private int cantidadPuertas;
     private String tipo;
 
     // Constructor
-    public Auto(int patente, String marca, String modelo, int anio, String estado, double precio, int cantidadPuertas, String tipo) {
+    public Auto(String patente, String marca, String modelo, int anio, String estado, double precio, int cantidadPuertas, String tipo) {
         super(patente, marca, modelo, anio, estado, precio);
         this.cantidadPuertas = cantidadPuertas;
         this.tipo = tipo;
@@ -33,11 +34,9 @@ public class Auto extends Vehiculo {
             ", modelo='" + getModelo() + "'" +
             ", anio=" + getAnio() +
             ", estado='" + getEstado() + "'" +
-            ", precio=" + getPrecio() + "'" +
+            ", precio=" + getPrecio() +
             ", cantidadPuertas=" + cantidadPuertas +
             ", tipo='" + tipo + "'" +
             '}';
     }
-    
-
 }
