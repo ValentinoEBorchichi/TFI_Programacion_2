@@ -12,8 +12,6 @@ public class Concesionaria {
 
     public static ArrayList<Auto> listaAutos = new ArrayList<>();
     public static ArrayList<Mantenimiento> listaMantenimientos = new ArrayList<>();
-<<<<<<< HEAD
-=======
 
     public static void guardarAutosEnArchivo(String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
@@ -60,5 +58,4 @@ public class Concesionaria {
             System.out.println("Error al cargar los autos: " + e.getMessage());
         }
     }
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
 }

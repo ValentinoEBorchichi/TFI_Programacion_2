@@ -41,11 +41,7 @@ public class Cliente extends Persona implements Comparable<Cliente> {
 
     @Override
     public int compareTo(Cliente otro) {
-<<<<<<< HEAD
-    return Integer.compare(this.getDNI(), otro.getDNI());
-=======
     return this.getApellido().compareToIgnoreCase(otro.getApellido());
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
 }
 
 
@@ -68,22 +64,6 @@ public class Cliente extends Persona implements Comparable<Cliente> {
     // ------------- METODOS DE CLIENTE --------------------
 
     public static void ListarClientes() {
-<<<<<<< HEAD
-        if (listaClientes.isEmpty()) {
-            System.out.println("\nNo hay clientes registrados.\n");
-            return;
-        } else {
-            System.out.println("\n----------- Lista de Clientes -------------\n");
-            for (Cliente cliente : listaClientes) {
-                System.out.println("DNI: " + cliente.getDNI() + ", Nombre completo: " + cliente.getNombre() + " " + cliente.getApellido()
-                        + ", Direccion: " + cliente.getDireccion() + ", Telefono: " + cliente.getTelefono() + ", Email: "
-                        + cliente.getEmail());
-            }
-            Cliente.guardarClientesEnArchivo("clientes.txt");
-        }
-    }
-
-=======
     if (listaClientes.isEmpty()) {
         System.out.println("\nNo hay clientes registrados.\n");
         return;
@@ -104,7 +84,6 @@ public class Cliente extends Persona implements Comparable<Cliente> {
 }
 
 
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
     public static Cliente buscarCliente(int DNI_Buscado) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getDNI() == DNI_Buscado) {
@@ -271,14 +250,9 @@ public class Cliente extends Persona implements Comparable<Cliente> {
     }
     
 
-<<<<<<< HEAD
 }
 
 
 
 
 
-
-=======
-}
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c

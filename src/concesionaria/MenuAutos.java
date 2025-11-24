@@ -17,18 +17,11 @@ public class MenuAutos {
             System.out.println("\n--- Opciones de Autos ---");
             System.out.println("1. Agregar auto");
             System.out.println("2. Listar autos");
-<<<<<<< HEAD
-            System.out.println("3. Buscar auto por patente");
-            System.out.println("4. Eliminar auto");
-            System.out.println("5. Filtrar autos por Marca");
-            System.out.println("6. Volver al menú principal");
-=======
             System.out.println("3. Listado de autos en mantenimiento");
             System.out.println("4. Buscar auto por patente");
             System.out.println("5. Eliminar auto");
             System.out.println("6. Filtrar autos por Marca");
             System.out.println("7. Volver al menú principal");
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
 
 
             System.out.print("Seleccione opción: ");
@@ -147,41 +140,8 @@ public class MenuAutos {
                         System.out.println("No se encontraron autos con esa marca.");
 
                     break;
-<<<<<<< HEAD
-  
-                case "5":
-                    System.out.print("Ingrese la marca a filtrar: ");
-                    String marcaFiltro = sc.nextLine().trim();
-
-                    // Implementación de la interfaz funcional con expresión lambda
-                    FiltroAuto filtroPorMarca = a -> a.getMarca().equalsIgnoreCase(marcaFiltro);
-                    boolean alguno = false;
-                    System.out.println("----- Autos filtrados por marca: " + marcaFiltro + " -----");
-
-                    for (Auto a : Concesionaria.listaAutos) {
-                        if (filtroPorMarca.filtrar(a)) {
-                            System.out.println("Patente: " + a.getPatente() +
-                                            ", Marca: " + a.getMarca() +
-                                            ", Modelo: " + a.getModelo() +
-                                            ", Año: " + a.getAnio() +
-                                            ", Estado: " + a.getEstado() +
-                                            ", Precio: $" + a.getPrecio() +
-                                            ", Puertas: " + a.getCantidadPuertas() +
-                                            ", Tipo: " + a.getTipo());
-                            alguno = true;
-                        }
-                    }
-
-                    if (!alguno)
-                        System.out.println("No se encontraron autos con esa marca.");
-
-                    break;
-
-                case "6":
-=======
 
                 case "7":
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
                     return;
 
                 default:
@@ -190,7 +150,3 @@ public class MenuAutos {
             }       
         }
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
