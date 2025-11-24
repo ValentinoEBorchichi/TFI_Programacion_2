@@ -34,6 +34,15 @@ public static ArrayList<Auto> getListaAutos() {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+    public static void setEstado(String patente, String nuevoEstado) {
+
+        for (Auto auto : Concesionaria.listaAutos) {
+            if (auto.getPatente().equals(patente)) {
+                auto.setEstado(nuevoEstado);
+                break;
+            }
+        }
+    }
 
     @Override
     public String toString() {
@@ -48,6 +57,7 @@ public static ArrayList<Auto> getListaAutos() {
             ", tipo='" + tipo + "'" +
             '}';
     }
+<<<<<<< HEAD
 
 
 public static void guardarAutosEnArchivo(String nombreArchivo) {
@@ -109,3 +119,6 @@ public static void cargarAutosDesdeArchivo(String nombreArchivo) {
 
 }
 
+=======
+}
+>>>>>>> 00b9d98f56122b2ae397bd3d470bf8c9350f867c
