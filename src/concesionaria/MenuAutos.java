@@ -9,6 +9,10 @@ public class MenuAutos {
         public interface FiltroAuto {   //sirve para filtrar autos por cualquiera de sus atributos
             boolean filtrar(Auto a);
         }
+    
+
+
+
 
     public void mostrarMenu(Scanner sc) {
 
@@ -16,11 +20,12 @@ public class MenuAutos {
 
             System.out.println("\n--- Opciones de Autos ---");
             System.out.println("1. Agregar auto");
-            System.out.println("2. Listar autos");
-            System.out.println("3. Buscar auto por patente");
-            System.out.println("4. Eliminar auto");
-            System.out.println("5. Filtrar autos por Marca");
-            System.out.println("6. Volver al menú principal");
+            System.out.println("2. Listar autos disponibles");
+            System.out.println("3. Listado de autos en mantenimiento");
+            System.out.println("4. Buscar auto por patente");
+            System.out.println("5. Eliminar auto");
+            System.out.println("6. Filtrar autos por Marca");
+            System.out.println("7. Volver al menú principal");
 
 
             System.out.print("Seleccione opción: ");
@@ -41,9 +46,6 @@ public class MenuAutos {
                     System.out.print("Año: ");
                     int anio = Integer.parseInt(sc.nextLine());
 
-                    System.out.print("Estado: ");
-                    String estado = sc.nextLine();
-
                     System.out.print("Precio: ");
                     double precio = Double.parseDouble(sc.nextLine());
 
@@ -52,6 +54,10 @@ public class MenuAutos {
 
                     System.out.print("Tipo: ");
                     String tipo = sc.nextLine();
+
+                    //System.out.print("Estado: ");
+                    //String estado = sc.nextLine();
+                    String estado = "Disponible";
 
                     Auto auto = new Auto(patente, marca, modelo, anio, estado, precio, puertas, tipo);
                     Concesionaria.listaAutos.add(auto);
@@ -74,6 +80,21 @@ public class MenuAutos {
                     
 
                 case "3":
+                    if (Concesionaria.listaMantenimientos.isEmpty()) {
+                        System.out.println("No hay autos en mantenimiento.");
+                    } else {
+                        System.out.println("--------------------- Listado de autos en mantenimiento ----------------------");
+                        int i = 1;
+                        for (Mantenimiento a : Concesionaria.listaMantenimientos) {
+                            System.out.println(i + ". ID Mantenimiento: " + a.getIdMantenimiento() + ", Descripición: " + a.getDescripcion() + ", Fecha: " + a.getFecha() + ", Costo: " + a.getCosto() + "\nVehículo:\n Patente: " + a.getVehiculo().getPatente() + ", Marca: " + a.getVehiculo().getMarca() + ", Modelo: " + a.getVehiculo().getModelo() + ", Año: " + a.getVehiculo().getAnio() + ", Estado: " + a.getVehiculo().getEstado() + ", Precio: $" + a.getVehiculo().getPrecio() + ", Puertas: " + ((Auto)a.getVehiculo()).getCantidadPuertas() + ", Tipo: " + ((Auto)a.getVehiculo()).getTipo());
+                            //System.out.println(i + ". Patente: " + a.getPatente() + ", Marca: " + a.getMarca() + ", Modelo: " + a.getModelo() + ", Año: " + a.getAnio() + ", Estado: " + a.getEstado() + ", Precio: $" + a.getPrecio() + ", Puertas: " + a.getCantidadPuertas() + ", Tipo: " + a.getTipo());
+                            i++;
+                        }
+                    }
+
+                break;
+
+                case "4":
                     System.out.print("Ingrese patente: ");
                     String patBuscar = sc.nextLine();
                     Auto encontrado = null;
@@ -86,7 +107,7 @@ public class MenuAutos {
                     System.out.println(encontrado != null ? encontrado : "No encontrado.");
                     break;
 
-                case "4":
+                case "5":
                     System.out.print("Patente a eliminar: ");
                     String patEliminar = sc.nextLine();
 
@@ -94,7 +115,7 @@ public class MenuAutos {
                     System.out.println(eliminado ? "Auto eliminado." : "No existe.");
                     break;
   
-                case "5":
+                case "6":
                     System.out.print("Ingrese la marca a filtrar: ");
                     String marcaFiltro = sc.nextLine().trim();
 
@@ -122,7 +143,7 @@ public class MenuAutos {
 
                     break;
 
-                case "6":
+                case "7":
                     return;
 
                 default:
