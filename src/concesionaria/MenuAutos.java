@@ -9,10 +9,6 @@ public class MenuAutos {
         public interface FiltroAuto {   //sirve para filtrar autos por cualquiera de sus atributos
             boolean filtrar(Auto a);
         }
-    
-
-
-
 
     public void mostrarMenu(Scanner sc) {
 
@@ -20,7 +16,7 @@ public class MenuAutos {
 
             System.out.println("\n--- Opciones de Autos ---");
             System.out.println("1. Agregar auto");
-            System.out.println("2. Listar autos disponibles");
+            System.out.println("2. Listar autos");
             System.out.println("3. Listado de autos en mantenimiento");
             System.out.println("4. Buscar auto por patente");
             System.out.println("5. Eliminar auto");

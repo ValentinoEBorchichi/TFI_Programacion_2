@@ -41,24 +41,36 @@ public class MenuMantenimiento {
                     }
 
                     System.out.println("Autos disponibles:");
-                    for (Auto a : Concesionaria.listaAutos)
-                        System.out.println(a);
+                    Concesionaria.listaAutos.stream()
+                            .filter(a -> "Disponible".equalsIgnoreCase(a.getEstado()))
+                            .forEach(System.out::println);
 
                     System.out.print("Patente del vehículo: ");
                     String pat = sc.nextLine();
 
                     Vehiculo veh = null;
-                    for (Auto a : Concesionaria.listaAutos)
-                        if (a.getPatente().equals(pat)) veh = a;
+                    for (Auto a : Concesionaria.listaAutos) {
+                        if (a.getPatente().equals(pat) && "Disponible".equalsIgnoreCase(a.getEstado())) {
+                            veh = a;
+                            break;
+                        }
+                    }
+
                     if (veh == null) {
-                        System.out.println("Vehículo inexistente.");
+                        System.out.println("Vehículo inexistente o no disponible.");
                         return;
                     }
+
+                    veh.setEstado("En mantenimiento");
 
                     Mantenimiento m = new Mantenimiento(id, desc, fecha, costo, veh);
                     Concesionaria.listaMantenimientos.add(m);
 
                     System.out.println("Mantenimiento registrado correctamente.");
+                    // Guardar tanto los mantenimientos como los cambios en los autos
+                    Mantenimiento.guardarMantenimientosEnArchivo("mantenimientos.txt");
+                    Concesionaria.guardarAutosEnArchivo("autos.txt");
+                    break;
 
                 case "2":
                     if (Concesionaria.listaMantenimientos.isEmpty()) {
@@ -71,6 +83,8 @@ public class MenuMantenimiento {
                             System.out.println(i + ". ID Mantenimiento: " + a.getIdMantenimiento() + ", Descripición: " + a.getDescripcion() + ", Fecha: " + a.getFecha() + ", Costo: " + a.getCosto() + "\nVehículo:\n Patente: " + a.getVehiculo().getPatente() + ", Marca: " + a.getVehiculo().getMarca() + ", Modelo: " + a.getVehiculo().getModelo() + ", Año: " + a.getVehiculo().getAnio() + ", Estado: " + a.getVehiculo().getEstado() + ", Precio: $" + a.getVehiculo().getPrecio() + ", Puertas: " + ((Auto)a.getVehiculo()).getCantidadPuertas() + ", Tipo: " + ((Auto)a.getVehiculo()).getTipo());
                             i++;
                         }
+                        // No cambiar el estado aquí: el listado solo muestra mantenimientos.
+                        // El vehículo volverá a "Disponible" cuando se elimine o finalice el mantenimiento.
                     }
                     break;
                     
@@ -79,9 +93,30 @@ public class MenuMantenimiento {
                     System.out.print("Ingrese el ID del mantenimiento a eliminar: ");
                     int idEliminar = Integer.parseInt(sc.nextLine());
 
-                    boolean eliminado = Concesionaria.listaMantenimientos.removeIf(mant -> mant.getIdMantenimiento() == idEliminar);
-                    System.out.println(eliminado ? "Mantenimiento eliminado." : "No existe.");
+                    // Buscar mantenimiento(s) a eliminar y devolver el vehículo a Disponible
+                    Mantenimiento encontrado = null;
+                    for (Mantenimiento mnt : Concesionaria.listaMantenimientos) {
+                        if (mnt.getIdMantenimiento() == idEliminar) {
+                            encontrado = mnt;
+                            break;
+                        }
+                    }
+
+                    if (encontrado != null) {
+                        // Restaurar estado del vehículo asociado
+                        if (encontrado.getVehiculo() != null) {
+                            encontrado.getVehiculo().setEstado("Disponible");
+                        }
+                        Concesionaria.listaMantenimientos.remove(encontrado);
+                        System.out.println("Mantenimiento eliminado.");
+                        // Guardar cambios
+                        Mantenimiento.guardarMantenimientosEnArchivo("mantenimientos.txt");
+                        Concesionaria.guardarAutosEnArchivo("autos.txt");
+                    } else {
+                        System.out.println("No existe.");
+                    }
                     break;
+
                 case "4":
                     return;
 
