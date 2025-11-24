@@ -4,11 +4,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Cliente extends Persona {
-
+public class Cliente extends Persona implements Comparable<Cliente> {
+    
     // Lista centralizada de clientes (estática)
     private static final ArrayList<Cliente> listaClientes = new ArrayList<>();
 
@@ -38,6 +39,12 @@ public class Cliente extends Persona {
         return Integer.hashCode(this.getDNI());
     }
 
+    @Override
+    public int compareTo(Cliente otro) {
+    return this.getApellido().compareToIgnoreCase(otro.getApellido());
+}
+
+
     // funcion para limpiar pantalla (quedó así nomas)
     public final static void limpiarPantalla() {
         try {
@@ -57,19 +64,25 @@ public class Cliente extends Persona {
     // ------------- METODOS DE CLIENTE --------------------
 
     public static void ListarClientes() {
-        if (listaClientes.isEmpty()) {
-            System.out.println("\nNo hay clientes registrados.\n");
-            return;
-        } else {
-            System.out.println("\n----------- Lista de Clientes -------------\n");
-            for (Cliente cliente : listaClientes) {
-                System.out.println("DNI: " + cliente.getDNI() + ", Nombre completo: " + cliente.getNombre() + " " + cliente.getApellido()
-                        + ", Direccion: " + cliente.getDireccion() + ", Telefono: " + cliente.getTelefono() + ", Email: "
-                        + cliente.getEmail());
-            }
-            Cliente.guardarClientesEnArchivo("clientes.txt");
-        }
+    if (listaClientes.isEmpty()) {
+        System.out.println("\nNo hay clientes registrados.\n");
+        return;
+    } else {
+        Collections.sort(listaClientes);
+
+        System.out.println("\n----------- Lista de Clientes -------------\n");
+        listaClientes.forEach(cliente -> {
+            System.out.println("DNI: " + cliente.getDNI()
+                    + ", Nombre completo: " + cliente.getNombre() + " " + cliente.getApellido()
+                    + ", Direccion: " + cliente.getDireccion()
+                    + ", Telefono: " + cliente.getTelefono()
+                    + ", Email: " + cliente.getEmail());
+        });
+
+        Cliente.guardarClientesEnArchivo("clientes.txt");
     }
+}
+
 
     public static Cliente buscarCliente(int DNI_Buscado) {
         for (Cliente cliente : listaClientes) {
@@ -238,13 +251,3 @@ public class Cliente extends Persona {
     
 
 }
-
-
-
-
-
-
-
-
-
-

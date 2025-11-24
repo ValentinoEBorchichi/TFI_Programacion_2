@@ -25,6 +25,15 @@ public class Auto extends Vehiculo {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+    public static void setEstado(String patente, String nuevoEstado) {
+
+        for (Auto auto : Concesionaria.listaAutos) {
+            if (auto.getPatente().equals(patente)) {
+                auto.setEstado(nuevoEstado);
+                break;
+            }
+        }
+    }
 
     @Override
     public String toString() {

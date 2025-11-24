@@ -1,6 +1,7 @@
 package concesionaria;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MenuVentas {
@@ -12,6 +13,11 @@ public class MenuVentas {
             return;
         }
 
+        if (Concesionaria.listaAutos.stream().noneMatch(auto -> "Disponible".equals(auto.getEstado()))) {
+            System.out.println("No hay autos disponibles para la venta.");
+            return;
+        }
+
         if (Cliente.getListaClientes().isEmpty()) {
             System.out.println("No hay clientes cargados.");
             return;
@@ -20,6 +26,9 @@ public class MenuVentas {
         System.out.println("\n--- NUEVA VENTA ---");
 
         System.out.println("Clientes disponibles:");
+        Collections.sort(Cliente.getListaClientes());
+        Cliente.getListaClientes().forEach(System.out::println);
+
         for (Cliente c : Cliente.getListaClientes())
             System.out.println(c.getDNI() + " - " + c.getNombre());
 
@@ -36,17 +45,25 @@ public class MenuVentas {
         }
 
         System.out.println("\nAutos disponibles:");
-        for (Auto a : Concesionaria.listaAutos)
-            System.out.println(a);
+        // Sólo autos con estado "Disponible"
+        Concesionaria.listaAutos.stream()
+                .filter(a -> "Disponible".equalsIgnoreCase(a.getEstado()))
+                .forEach(System.out::println);
 
         System.out.print("Ingrese patente del auto a vender: ");
         String pat = sc.nextLine();
 
+        
         Auto auto = null;
-        for (Auto a : Concesionaria.listaAutos) 
-            if (a.getPatente().equals(pat)) auto = a;
+        for (Auto a : Concesionaria.listaAutos) {
+            if (a.getPatente().equals(pat) && "Disponible".equalsIgnoreCase(a.getEstado())) {
+                auto = a;
+                break;
+            }
+        }
+
         if (auto == null) {
-            System.out.println("Auto inexistente.");
+            System.out.println("Auto inexistente o no disponible para la venta.");
             return;
         }
 
@@ -62,6 +79,8 @@ public class MenuVentas {
         );
 
         Venta venta = new Venta(vendedor, cliente, detalles);
+
+        Concesionaria.listaAutos.remove(auto);
 
         System.out.println("\nVenta registrada exitosamente.");
         System.out.println("Total Final: $" + venta.getTotalFinal());
