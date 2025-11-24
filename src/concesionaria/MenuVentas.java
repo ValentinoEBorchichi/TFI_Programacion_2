@@ -67,6 +67,8 @@ public class MenuVentas {
 
         Venta venta = new Venta(vendedor, cliente, detalles);
 
+        Concesionaria.listaAutos.remove(auto);
+
         System.out.println("\nVenta registrada exitosamente.");
         System.out.println("Total Final: $" + venta.getTotalFinal());
     }

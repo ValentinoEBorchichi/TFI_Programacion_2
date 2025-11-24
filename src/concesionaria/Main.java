@@ -13,6 +13,7 @@ public class Main {
 
         public static void mostrarMenuPrincipal() {
             Cliente.cargarClientesDesdeArchivo("clientes.txt"); // Cargar clientes al iniciar el programa
+            Concesionaria.cargarAutosDesdeArchivo("autos.txt");   // Cargar autos al iniciar el programa
             Scanner sc = new Scanner(System.in);
             int opcion = 0;
 
