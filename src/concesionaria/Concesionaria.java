@@ -12,6 +12,9 @@ public class Concesionaria {
 
     public static ArrayList<Auto> listaAutos = new ArrayList<>();
     public static ArrayList<Mantenimiento> listaMantenimientos = new ArrayList<>();
+        // Historial de ventas usando lista enlazada propia
+    public static HistorialVentas historialVentas = new HistorialVentas();
+
 
     public static void guardarAutosEnArchivo(String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
