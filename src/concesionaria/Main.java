@@ -53,11 +53,7 @@ public class Main {
                     break;
     
                     case 5:
-                    boolean hayVentas = HistorialVentas.getHistorialVentas().mostrarHistorial();
-                    if (hayVentas) {
-                        System.out.println("Presione ENTER para volver al menú...");
-                        sc.nextLine();
-                    }
+                    Concesionaria.historialVentas.mostrarHistorial();
                     break;
 
                     case 6:
