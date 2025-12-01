@@ -79,6 +79,9 @@ public class MenuVentas {
         );
 
         Venta venta = new Venta(vendedor, cliente, detalles);
+                // Registrar la venta en el historial (linked list propia)
+        Concesionaria.historialVentas.registrarVenta(venta);
+
 
         Concesionaria.listaAutos.remove(auto);
 

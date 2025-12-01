@@ -24,7 +24,8 @@ public class Main {
                 System.out.println("2. Opciones de autos");
                 System.out.println("3. Opciones de ventas");
                 System.out.println("4. Opciones de mantenimiento");
-                System.out.println("5. Salir");
+                System.out.println("5. Ver historial de ventas");
+                System.out.println("6. Salir");
                 System.out.print("Elija una opción: ");
                 System.out.println("\n");
 
@@ -50,9 +51,13 @@ public class Main {
                     case 4:
                     new MenuMantenimiento().mostrarMenu(sc);
                     break;
-
-
                     case 5:
+                    Concesionaria.historialVentas.mostrarHistorial();
+                    break;
+
+
+
+                    case 6:
                         break;
 
                     default:
