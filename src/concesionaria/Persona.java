@@ -39,7 +39,4 @@ public class Persona {
     public String getEmail() {
         return this.Email;
     }
-    
-
-
 }

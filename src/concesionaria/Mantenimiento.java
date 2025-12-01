@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Mantenimiento {
 
@@ -14,8 +13,6 @@ public class Mantenimiento {
     String descripcion;
     String fecha;
     double costo;
-
-    ArrayList<Repuesto> repuestosUsados = new ArrayList<>();
     private Vehiculo vehiculo;
 
     public Mantenimiento(int idMantenimiento, String descripcion, String fecha, double costo) {
@@ -70,19 +67,8 @@ public class Mantenimiento {
         this.vehiculo = vehiculo;
     }
 
-    public ArrayList<Repuesto> getRepuestosUsados() {
-        return repuestosUsados;
-    }
-
-    public void agregarRepuesto(Repuesto r) {
-        repuestosUsados.add(r);
-    }
-
     public double calcularCostoTotal() {
         double total = costo;
-        for (Repuesto r : repuestosUsados) {
-            total += r.getPrecio();
-        }
         return total;
     }
 
@@ -93,7 +79,6 @@ public class Mantenimiento {
                 ", descripcion='" + descripcion + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", costo base=" + costo +
-                ", repuestos=" + repuestosUsados +
                 ", costo total=" + calcularCostoTotal() +
                 '}';
     }
