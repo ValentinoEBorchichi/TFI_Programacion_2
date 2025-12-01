@@ -1,2 +1,0 @@
-123,dsf,dsf,435,En mantenimiento,34.0,4,fgd
-234,dfg,gfd,45,Disponible,345.0,4,df

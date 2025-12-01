@@ -75,9 +75,9 @@ public class MenuVentas {
         Venta venta = new Venta(cliente, detalles);
         Concesionaria.historialVentas.registrarVenta(venta);
         Concesionaria.historialVentas.guardarVentasEnArchivo("ventas.txt");
-        Concesionaria.guardarAutosEnArchivo("autos.txt");
         System.out.println("\nVenta registrada exitosamente.");
         System.out.println("Total Final: $" + venta.getTotalFinal());
         Concesionaria.listaAutos.remove(auto);
+        Concesionaria.guardarAutosEnArchivo("autos.txt");
     }
 }

@@ -41,7 +41,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta realizada a " + cliente.getNombre() +
+        return "Venta realizada a " + cliente.getNombre() + " " + cliente.getApellido() +
                ". Total: $" + totalFinal;
     }
 }
