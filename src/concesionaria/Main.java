@@ -15,10 +15,11 @@ public class Main {
             Cliente.cargarClientesDesdeArchivo("clientes.txt"); // Cargar clientes al iniciar el programa
             Concesionaria.cargarAutosDesdeArchivo("autos.txt");   // Cargar autos al iniciar el programa
             Mantenimiento.cargarMantenimientosDesdeArchivo("mantenimientos.txt"); // Cargar mantenimientos al iniciar el programa
+            Concesionaria.historialVentas.cargarVentasDesdeArchivo("ventas.txt");
             Scanner sc = new Scanner(System.in);
             int opcion = 0;
 
-            while (opcion != 5) { // inicio del bucle while
+            while (opcion != 6) { 
                 System.out.println("\n--- Concesionaria El Pepe ---");
                 System.out.println("1. Opciones de cliente");
                 System.out.println("2. Opciones de autos");
@@ -51,21 +52,19 @@ public class Main {
                     case 4:
                     new MenuMantenimiento().mostrarMenu(sc);
                     break;
+    
                     case 5:
                     Concesionaria.historialVentas.mostrarHistorial();
                     break;
 
-
-
                     case 6:
-                        break;
+                    break;
 
                     default:
-                        System.out.println("Opción inválida.");
-                } // fin switch
+                    System.out.println("Opción inválida.");
+                } 
 
-            } // fin while
-
+            } 
             sc.close();
         }
     }

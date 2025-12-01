@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class Venta {
 
-    private EmpleadoVenta vendedor;
     private Cliente cliente;
     private ArrayList<DetalleVenta> detalles;
     private double totalFinal;
 
 
-    public Venta(EmpleadoVenta vendedor, Cliente cliente, ArrayList<DetalleVenta> detalles) {
-        this.vendedor = vendedor;
+    public Venta(Cliente cliente, ArrayList<DetalleVenta> detalles) {
         this.cliente = cliente;
         this.detalles = detalles;
         calcularTotalFinal();
@@ -26,11 +24,6 @@ public class Venta {
         }
 
         this.totalFinal = total;
-    }
-
-    // ---- GETTERS ----
-    public EmpleadoVenta getVendedor() {
-        return vendedor;
     }
 
     public Cliente getCliente() {
@@ -48,8 +41,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta realizada a " + cliente.getNombre() +
-               " por el vendedor " + vendedor.getNombre() +
+        return "Venta realizada a " + cliente.getNombre() + " " + cliente.getApellido() +
                ". Total: $" + totalFinal;
     }
 }

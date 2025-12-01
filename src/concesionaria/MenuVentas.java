@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class MenuVentas {
 
     public void mostrarMenu(Scanner sc) {
+        
 
         if (Concesionaria.listaAutos.isEmpty()) {
             System.out.println("No hay autos para vender.");
@@ -45,7 +46,6 @@ public class MenuVentas {
         }
 
         System.out.println("\nAutos disponibles:");
-        // Sólo autos con estado "Disponible"
         Concesionaria.listaAutos.stream()
                 .filter(a -> "Disponible".equalsIgnoreCase(a.getEstado()))
                 .forEach(System.out::println);
@@ -72,20 +72,12 @@ public class MenuVentas {
         ArrayList<DetalleVenta> detalles = new ArrayList<>();
         detalles.add(dv);
 
-        // Vendedor ficticio por ahora
-        EmpleadoVenta vendedor = new EmpleadoVenta(
-            55555555, "Carlos", "Gómez", "Calle", "111", "mail@mail.com",
-            1, 250000, 0.06
-        );
-
-        Venta venta = new Venta(vendedor, cliente, detalles);
-                // Registrar la venta en el historial (linked list propia)
+        Venta venta = new Venta(cliente, detalles);
         Concesionaria.historialVentas.registrarVenta(venta);
-
-
-        Concesionaria.listaAutos.remove(auto);
-
+        Concesionaria.historialVentas.guardarVentasEnArchivo("ventas.txt");
         System.out.println("\nVenta registrada exitosamente.");
         System.out.println("Total Final: $" + venta.getTotalFinal());
+        Concesionaria.listaAutos.remove(auto);
+        Concesionaria.guardarAutosEnArchivo("autos.txt");
     }
 }
