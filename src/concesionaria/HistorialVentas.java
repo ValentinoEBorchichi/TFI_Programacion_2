@@ -1,12 +1,13 @@
 package concesionaria;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class HistorialVentas implements Iterable<Venta> {
-
-    public static HistorialVentas historialVentas = new HistorialVentas();
-
-
 
     private static class Node {
         Venta venta;
@@ -35,6 +36,7 @@ public class HistorialVentas implements Iterable<Venta> {
             tail = nuevo;
         }
         size++;
+        guardarVentasEnArchivo("ventas.txt");
     }
 
     public boolean eliminarVenta(Venta venta) {
@@ -63,6 +65,7 @@ public class HistorialVentas implements Iterable<Venta> {
         }
         actual.next = actual.next.next;
         size--;
+        guardarVentasEnArchivo("ventas.txt");
         return true;
     }
 
@@ -83,12 +86,6 @@ public class HistorialVentas implements Iterable<Venta> {
 
     return true; 
 }
-
-
-public static HistorialVentas getHistorialVentas() {
-    return historialVentas;
-}
-
     public int size() {
         return size;
     }
@@ -115,4 +112,77 @@ public static HistorialVentas getHistorialVentas() {
             }
         };
     }
+
+    // ------------------ Metodos para guardar y cargar desde archivo -------------------
+    public void guardarVentasEnArchivo(String nombreArchivo) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
+
+        for (Venta v : this) {
+
+            Cliente cliente = v.getCliente();
+            DetalleVenta detalle = v.getDetalles().get(0);
+            Vehiculo vehiculo = detalle.getVehiculo();
+
+            String linea = cliente.getDNI() + "," +
+                           vehiculo.getPatente() + "," +
+                           v.getTotalFinal();
+
+            writer.write(linea);
+            writer.newLine();
+        }
+
+        System.out.println("Ventas guardadas correctamente.");
+
+    } catch (IOException e) {
+        System.out.println("Error al guardar las ventas: " + e.getMessage());
+    }
 }
+
+    public void cargarVentasDesdeArchivo(String nombreArchivo) {
+    java.io.File archivo = new java.io.File(nombreArchivo);
+    if (!archivo.exists()) {
+        return;
+    }
+
+    try (Scanner sc = new Scanner(archivo)) {
+
+        while (sc.hasNextLine()) {
+            String linea = sc.nextLine().trim();
+            if (linea.isEmpty()) continue;
+
+            String[] datos = linea.split(",");
+            if (datos.length != 3) continue;
+
+            int dniCliente   = Integer.parseInt(datos[0].trim());
+            String patenteAuto  = datos[1].trim();
+
+            Cliente cliente = Cliente.getListaClientes().stream()
+                    .filter(c -> c.getDNI() == dniCliente)
+                    .findFirst()
+                    .orElse(null);
+
+            Vehiculo vehiculo = Concesionaria.listaAutos.stream()
+                    .filter(a -> a.getPatente().equals(patenteAuto))
+                    .findFirst()
+                    .orElse(null);
+
+            if (cliente == null || vehiculo == null) {
+                continue;
+            }
+
+            ArrayList<DetalleVenta> detalles = new ArrayList<>();
+            detalles.add(new DetalleVenta(vehiculo, 1));
+
+            Venta venta = new Venta(cliente, detalles);
+
+            this.registrarVenta(venta);
+        }
+
+        System.out.println("Ventas cargadas desde el archivo correctamente.");
+
+    } catch (Exception e) {
+        System.out.println("Error al cargar las ventas desde el archivo: " + e.getMessage());
+    }
+}
+}
+

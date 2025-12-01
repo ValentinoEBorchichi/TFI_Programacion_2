@@ -46,7 +46,6 @@ public class MenuVentas {
         }
 
         System.out.println("\nAutos disponibles:");
-        // Sólo autos con estado "Disponible"
         Concesionaria.listaAutos.stream()
                 .filter(a -> "Disponible".equalsIgnoreCase(a.getEstado()))
                 .forEach(System.out::println);
@@ -74,13 +73,11 @@ public class MenuVentas {
         detalles.add(dv);
 
         Venta venta = new Venta(cliente, detalles);
-                // Registrar la venta en el historial (linked list propia)
         Concesionaria.historialVentas.registrarVenta(venta);
-
-
-        Concesionaria.listaAutos.remove(auto);
-
+        Concesionaria.historialVentas.guardarVentasEnArchivo("ventas.txt");
+        Concesionaria.guardarAutosEnArchivo("autos.txt");
         System.out.println("\nVenta registrada exitosamente.");
         System.out.println("Total Final: $" + venta.getTotalFinal());
+        Concesionaria.listaAutos.remove(auto);
     }
 }
