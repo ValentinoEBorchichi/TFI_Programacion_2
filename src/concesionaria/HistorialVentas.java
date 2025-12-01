@@ -72,7 +72,7 @@ public class HistorialVentas implements Iterable<Venta> {
 
     if (estaVacio()) {
         System.out.println("No hay ventas registradas.");
-        return false;   // ← señal para volver al menú principal
+        return false;  
     }
 
     int i = 1;
@@ -81,7 +81,7 @@ public class HistorialVentas implements Iterable<Venta> {
         i++;
     }
 
-    return true; // hay ventas
+    return true; 
 }
 
 

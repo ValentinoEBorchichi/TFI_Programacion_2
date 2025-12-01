@@ -18,7 +18,7 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             int opcion = 0;
 
-            while (opcion != 6) { // inicio del bucle while
+            while (opcion != 6) { 
                 System.out.println("\n--- Concesionaria El Pepe ---");
                 System.out.println("1. Opciones de cliente");
                 System.out.println("2. Opciones de autos");
@@ -53,21 +53,18 @@ public class Main {
                     break;
     
                     case 5:
-                        boolean hayVentas = HistorialVentas.getHistorialVentas().mostrarHistorial();
-
-                        // si NO hay ventas, NO hacemos break → dejamos que el while repita
-                        if (hayVentas) {
-                            System.out.println("Presione ENTER para volver al menú...");
-                            sc.nextLine();
-                        }
-                        // no va break si no hay ventas
-                        break;
+                    boolean hayVentas = HistorialVentas.getHistorialVentas().mostrarHistorial();
+                    if (hayVentas) {
+                        System.out.println("Presione ENTER para volver al menú...");
+                        sc.nextLine();
+                    }
+                    break;
 
                     case 6:
-                        break;
+                    break;
 
                     default:
-                        System.out.println("Opción inválida.");
+                    System.out.println("Opción inválida.");
                 } 
 
             } 
