@@ -24,8 +24,6 @@ El objetivo es simular el funcionamiento básico de una concesionaria:
 - Registrar mantenimientos de vehículos.
 - Guardar todo en archivos de texto para no perder la información.
 
-A la vez, integra de forma práctica los temas vistos en la materia Programación II.
-
 ---
 
 ## 2. Tecnologías y herramientas utilizadas
@@ -94,12 +92,6 @@ package concesionaria;
   - Ver autos en mantenimiento
   - Filtrar autos por marca utilizando una interfaz funcional y una expresión lambda
 
-- MenuVentas  
-  Menú para registrar ventas:
-  - Solicita cliente y auto
-  - Crea la venta y la registra en el historial
-  - Actualiza los archivos ventas.txt y autos.txt
-
 - MenuMantenimiento  
   Menú para:
   - Agregar, listar y eliminar mantenimientos
@@ -109,11 +101,12 @@ package concesionaria;
   Punto de entrada del sistema.  
   Muestra el menú principal con las opciones:
 
+
   --- Concesionaria El Pepe ---
   1. Opciones de cliente
   2. Opciones de autos
-  3. Opciones de ventas
-  4. Opciones de mantenimiento
+  3. Opciones de mantenimiento
+  4. Registrar nueva venta
   5. Ver historial de ventas
   6. Salir
 
@@ -142,5 +135,3 @@ package concesionaria;
 - Colecciones: uso de ArrayList para manejar listas dinámicas.  
 - Estructuras propias: implementación de una lista enlazada simple para el historial de ventas.  
 - Archivos: lectura y escritura de datos en .txt para persistir la información del sistema.
-
-
