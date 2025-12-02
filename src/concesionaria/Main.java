@@ -23,8 +23,8 @@ public class Main {
                 System.out.println("\n--- Concesionaria El Pepe ---");
                 System.out.println("1. Opciones de cliente");
                 System.out.println("2. Opciones de autos");
-                System.out.println("3. Opciones de ventas");
-                System.out.println("4. Opciones de mantenimiento");
+                System.out.println("3. Opciones de mantenimiento");
+                System.out.println("4. Registrar nueva venta");
                 System.out.println("5. Ver historial de ventas");
                 System.out.println("6. Salir");
                 System.out.print("Elija una opción: ");
@@ -46,11 +46,11 @@ public class Main {
                     break;
 
                     case 3:
-                    new MenuVentas().mostrarMenu(sc);
+                    new MenuMantenimiento().mostrarMenu(sc);
                     break;
 
                     case 4:
-                    new MenuMantenimiento().mostrarMenu(sc);
+                    new MenuVentas().mostrarMenu(sc);
                     break;
     
                     case 5:
