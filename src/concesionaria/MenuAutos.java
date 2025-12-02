@@ -51,8 +51,7 @@ public class MenuAutos {
                     System.out.print("Tipo: ");
                     String tipo = sc.nextLine();
 
-                    //System.out.print("Estado: ");
-                    //String estado = sc.nextLine();
+                    
                     String estado = "Disponible";
 
                     Auto auto = new Auto(patente, marca, modelo, anio, estado, precio, puertas, tipo);
@@ -84,7 +83,7 @@ public class MenuAutos {
                         int i = 1;
                         for (Mantenimiento a : Concesionaria.listaMantenimientos) {
                             System.out.println(i + ". ID Mantenimiento: " + a.getIdMantenimiento() + ", Descripición: " + a.getDescripcion() + ", Fecha: " + a.getFecha() + ", Costo: " + a.getCosto() + "\nVehículo:\n Patente: " + a.getVehiculo().getPatente() + ", Marca: " + a.getVehiculo().getMarca() + ", Modelo: " + a.getVehiculo().getModelo() + ", Año: " + a.getVehiculo().getAnio() + ", Estado: " + a.getVehiculo().getEstado() + ", Precio: $" + a.getVehiculo().getPrecio() + ", Puertas: " + ((Auto)a.getVehiculo()).getCantidadPuertas() + ", Tipo: " + ((Auto)a.getVehiculo()).getTipo());
-                            //System.out.println(i + ". Patente: " + a.getPatente() + ", Marca: " + a.getMarca() + ", Modelo: " + a.getModelo() + ", Año: " + a.getAnio() + ", Estado: " + a.getEstado() + ", Precio: $" + a.getPrecio() + ", Puertas: " + a.getCantidadPuertas() + ", Tipo: " + a.getTipo());
+                           
                             i++;
                         }
                     }
