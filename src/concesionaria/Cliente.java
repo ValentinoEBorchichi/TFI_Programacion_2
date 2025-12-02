@@ -82,6 +82,17 @@ public class Cliente extends Persona implements Comparable<Cliente> {
         Cliente.guardarClientesEnArchivo("clientes.txt");
     }
 }
+// Busca un cliente por DNI y lanza una excepción si no lo encuentra
+public static Cliente buscarClientePorDni(int dni) throws ClienteNoEncontradoException {
+    for (Cliente cliente : listaClientes) {
+        if (cliente.getDNI() == dni) {
+            return cliente;
+        }
+    }
+    
+    throw new ClienteNoEncontradoException("No se encontró un cliente con DNI: " + dni);
+}
+
 
 
     public static Cliente buscarCliente(int DNI_Buscado) {
@@ -93,6 +104,8 @@ public class Cliente extends Persona implements Comparable<Cliente> {
         System.out.println("Cliente no encontrado.");
         return null;
     }
+    
+
 
     public static void modificarCliente(Scanner scanner) {
         System.out.print("Ingrese el DNI del cliente a modificar: ");
@@ -170,13 +183,30 @@ public class Cliente extends Persona implements Comparable<Cliente> {
                 case "2":
                     limpiarPantalla();
                     System.out.print("Ingrese el DNI a buscar: ");
-                    int dniBuscar = Integer.parseInt(scanner.nextLine().trim());
-                    Cliente c = buscarCliente(dniBuscar);
-                    if (c != null) {
+                    String dniTexto = scanner.nextLine().trim();
+
+                    try {
+                        int dniBuscar = Integer.parseInt(dniTexto);
+
+                        // Usamos el nuevo método que lanza la excepción personalizada
+                        Cliente c = buscarClientePorDni(dniBuscar);
+
                         System.out.println("Cliente encontrado:\n");
-                        System.out.println("DNI: " + c.getDNI() + ", Nombre: " + c.getNombre() + " " + c.getApellido() + ", Direccion: " + c.getDireccion() + ", Telefono: " + c.getTelefono() + ", Email: " + c.getEmail());
+                        System.out.println("DNI: " + c.getDNI()
+                                + ", Nombre: " + c.getNombre() + " " + c.getApellido()
+                                + ", Direccion: " + c.getDireccion()
+                                + ", Telefono: " + c.getTelefono()
+                                + ", Email: " + c.getEmail());
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: el DNI no debe contener puntos (.)");
+                    } catch (ClienteNoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        System.out.println("Búsqueda de cliente finalizada.\n");
                     }
                     break;
+
                 case "3":
                     limpiarPantalla();
                     agregarCliente(scanner);
@@ -248,6 +278,4 @@ public class Cliente extends Persona implements Comparable<Cliente> {
             System.out.println("Error al cargar los clientes desde el archivo: " + e.getMessage());
         }
     }
-    
-
 }
